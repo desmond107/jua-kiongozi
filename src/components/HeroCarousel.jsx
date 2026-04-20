@@ -6,63 +6,63 @@ import { Link } from 'react-router-dom'
 const SLIDES = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1611348586840-ea9872d33411?w=1800&q=85&auto=format',
-    eyebrow: '🗳️ Kenya General Election',
-    title: 'Know Your\nLeaders',
-    highlight: 'Leaders',
-    sub: 'Explore comprehensive profiles of every presidential candidate competing for Kenya\'s highest office in 2027.',
-    cta: 'View Candidates',
-    ctaLink: '/candidates',
-    secondaryCta: 'Live Analytics',
-    secondaryLink: '/analytics',
-    accent: '#C8102E',
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=1800&q=85&auto=format',
-    eyebrow: '🦁 Our Heritage',
+    image: '/hero-1.jpg',
+    eyebrow: '🦁 Kenya\'s Wild Beauty',
     title: 'The Land\nWe Love',
     highlight: 'Love',
-    sub: 'From the Maasai Mara to Mount Kenya — 47 million voices shaping the future of a great nation.',
+    sub: 'From the golden savannas of Maasai Mara to the shores of Lake Victoria — 47 million voices shaping the soul of a great nation.',
     cta: 'Explore Counties',
     ctaLink: '/counties',
     secondaryCta: 'Read Blog',
     secondaryLink: '/blog',
-    accent: '#006600',
+    accent: '#e8a000',
   },
   {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1607792013280-0b0d43c1a313?w=1800&q=85&auto=format',
-    eyebrow: '⚡ Gen Z Unity',
-    title: 'The Youth\nHave Woken',
-    highlight: 'Woken',
-    sub: '30 million young Kenyans hold the power to rewrite this nation\'s story. Your vote is your loudest voice.',
-    cta: 'Cast Your Vote',
-    ctaLink: '/candidates',
-    secondaryCta: 'See Results',
-    secondaryLink: '/analytics',
+    id: 2,
+    image: '/hero-2.jpg',
+    eyebrow: '🌊 Kenya\'s Coastal Heritage',
+    title: 'A Nation\nOf Beauty',
+    highlight: 'Beauty',
+    sub: 'From Lamu\'s ancient dhow harbours to Mombasa\'s coral reefs — Kenya\'s coast carries centuries of culture and history.',
+    cta: 'Explore Counties',
+    ctaLink: '/counties',
+    secondaryCta: 'Read Blog',
+    secondaryLink: '/blog',
     accent: '#00d4ff',
   },
   {
+    id: 3,
+    image: '/hero-3.jpg',
+    eyebrow: '⛰️ Rise Like Kilimanjaro',
+    title: 'Know Your\nLeaders',
+    highlight: 'Leaders',
+    sub: 'Just as Kilimanjaro rises above the clouds, Kenya\'s future demands leaders who stand tall for every citizen.',
+    cta: 'View Candidates',
+    ctaLink: '/candidates',
+    secondaryCta: 'Live Analytics',
+    secondaryLink: '/analytics',
+    accent: '#006600',
+  },
+  {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=1800&q=85&auto=format',
-    eyebrow: '🏙️ Nairobi Rising',
+    image: '/hero-4.jpg',
+    eyebrow: '🏙️ Urban Kenya Rising',
     title: 'Urban Kenya\nDemands More',
     highlight: 'More',
-    sub: 'Silicon Savannah to the streets — Kenya\'s urban revolution demands transparent, accountable leadership.',
+    sub: 'Silicon Savannah to the streets — Kenya\'s urban revolution demands transparent, accountable, servant leadership.',
     cta: 'Meet the Candidates',
     ctaLink: '/candidates',
     secondaryCta: 'Explore Blog',
     secondaryLink: '/blog',
-    accent: '#e8a000',
+    accent: '#C8102E',
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1800&q=85&auto=format',
-    eyebrow: '🔥 Niko Kadi',
+    image: '/hero-5.jpg',
+    eyebrow: '🔥 Niko Kadi Movement',
     title: 'I Am Here.\nI Vote.',
     highlight: 'Vote.',
-    sub: 'Join millions of Kenyans saying NO to poor leadership. Niko Kadi — I am here and I will be counted.',
+    sub: 'Join millions of Kenyans saying NO to poor leadership. Niko Kadi — I am here, I stand, and I will be counted.',
     cta: 'Join the Movement',
     ctaLink: '/candidates',
     secondaryCta: 'View Analytics',
@@ -112,10 +112,11 @@ export default function HeroCarousel() {
           className="absolute inset-0"
         >
           <img src={slide.image} alt="" className="w-full h-full object-cover object-center" />
-          {/* layered overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-urban-bg via-urban-bg/50 to-transparent" />
-          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 80% at 15% 50%, ${slide.accent}12 0%, transparent 60%)` }} />
+          {/* layered overlays — keep text clearly readable */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-urban-bg via-urban-bg/60 to-transparent" />
+          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 80% at 15% 50%, ${slide.accent}18 0%, transparent 60%)` }} />
         </motion.div>
       </AnimatePresence>
 
@@ -178,7 +179,7 @@ export default function HeroCarousel() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              className="text-gray-300/80 text-base md:text-lg leading-relaxed mb-8 max-w-lg"
+              className="text-gray-200 text-base md:text-lg leading-relaxed mb-8 max-w-lg drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]"
             >
               {slide.sub}
             </motion.p>
