@@ -11,13 +11,13 @@ export default {
           white: '#FFFFFF',
         },
         urban: {
-          bg: '#050507',
-          surface: '#0c0c0f',
-          card: '#111116',
-          cardHover: '#161620',
-          border: '#1e1e2a',
-          borderLight: '#2a2a3a',
-          muted: '#5a5a72',
+          bg: '#0d1117',
+          surface: '#141921',
+          card: '#1a1f2e',
+          cardHover: '#1f2535',
+          border: '#2d3348',
+          borderLight: '#3d4460',
+          muted: '#8892a4',
           accent: '#00d4ff',
           accentSoft: '#00aacc',
           gold: '#e8a000',
@@ -94,9 +94,9 @@ export default {
       },
       backgroundImage: {
         'mesh-dark': `
-          radial-gradient(ellipse 80% 60% at 20% 0%, rgba(200,16,46,0.08) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 50% at 80% 100%, rgba(0,212,255,0.06) 0%, transparent 60%),
-          radial-gradient(ellipse 50% 40% at 50% 50%, rgba(124,58,237,0.04) 0%, transparent 70%)
+          radial-gradient(ellipse 80% 60% at 20% 0%, rgba(200,16,46,0.12) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 100%, rgba(0,212,255,0.09) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 40% at 50% 50%, rgba(124,58,237,0.07) 0%, transparent 70%)
         `,
         'mesh-card': `
           radial-gradient(ellipse 120% 80% at 50% -20%, rgba(200,16,46,0.07) 0%, transparent 60%)

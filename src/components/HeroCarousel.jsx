@@ -112,11 +112,10 @@ export default function HeroCarousel() {
           className="absolute inset-0"
         >
           <img src={slide.image} alt="" className="w-full h-full object-cover object-center" />
-          {/* layered overlays — keep text clearly readable */}
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-urban-bg via-urban-bg/60 to-transparent" />
-          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 80% at 15% 50%, ${slide.accent}18 0%, transparent 60%)` }} />
+          {/* minimal overlay — just enough to keep text readable */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-urban-bg/80 via-transparent to-transparent" />
+          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 80% at 15% 50%, ${slide.accent}10 0%, transparent 60%)` }} />
         </motion.div>
       </AnimatePresence>
 
@@ -160,7 +159,7 @@ export default function HeroCarousel() {
 
             {/* Headline */}
             <h1 className="font-display font-bold text-white leading-[1.05] tracking-tight mb-5"
-              style={{ fontSize: 'clamp(3rem, 7vw, 6rem)' }}>
+              style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}>
               {slide.title.split('\n').map((line, li) => (
                 <div key={li}>
                   {line.includes(slide.highlight) ? (
