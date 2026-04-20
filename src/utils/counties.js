@@ -1,0 +1,60 @@
+export const KENYA_COUNTIES = [
+  { id: 1, name: 'Mombasa', region: 'Coast', capital: 'Mombasa City' },
+  { id: 2, name: 'Kwale', region: 'Coast', capital: 'Kwale Town' },
+  { id: 3, name: 'Kilifi', region: 'Coast', capital: 'Kilifi Town' },
+  { id: 4, name: 'Tana River', region: 'Coast', capital: 'Hola' },
+  { id: 5, name: 'Lamu', region: 'Coast', capital: 'Lamu Town' },
+  { id: 6, name: 'Taita-Taveta', region: 'Coast', capital: 'Voi' },
+  { id: 7, name: 'Garissa', region: 'North Eastern', capital: 'Garissa Town' },
+  { id: 8, name: 'Wajir', region: 'North Eastern', capital: 'Wajir Town' },
+  { id: 9, name: 'Mandera', region: 'North Eastern', capital: 'Mandera Town' },
+  { id: 10, name: 'Marsabit', region: 'Eastern', capital: 'Marsabit Town' },
+  { id: 11, name: 'Isiolo', region: 'Eastern', capital: 'Isiolo Town' },
+  { id: 12, name: 'Meru', region: 'Eastern', capital: 'Meru Town' },
+  { id: 13, name: 'Tharaka-Nithi', region: 'Eastern', capital: 'Chuka' },
+  { id: 14, name: 'Embu', region: 'Eastern', capital: 'Embu Town' },
+  { id: 15, name: 'Kitui', region: 'Eastern', capital: 'Kitui Town' },
+  { id: 16, name: 'Machakos', region: 'Eastern', capital: 'Machakos Town' },
+  { id: 17, name: 'Makueni', region: 'Eastern', capital: 'Wote' },
+  { id: 18, name: 'Nyandarua', region: 'Central', capital: 'Ol Kalou' },
+  { id: 19, name: 'Nyeri', region: 'Central', capital: 'Nyeri Town' },
+  { id: 20, name: 'Kirinyaga', region: 'Central', capital: 'Kerugoya' },
+  { id: 21, name: 'Murang\'a', region: 'Central', capital: 'Murang\'a Town' },
+  { id: 22, name: 'Kiambu', region: 'Central', capital: 'Kiambu Town' },
+  { id: 23, name: 'Turkana', region: 'Rift Valley', capital: 'Lodwar' },
+  { id: 24, name: 'West Pokot', region: 'Rift Valley', capital: 'Kapenguria' },
+  { id: 25, name: 'Samburu', region: 'Rift Valley', capital: 'Maralal' },
+  { id: 26, name: 'Trans Nzoia', region: 'Rift Valley', capital: 'Kitale' },
+  { id: 27, name: 'Uasin Gishu', region: 'Rift Valley', capital: 'Eldoret' },
+  { id: 28, name: 'Elgeyo-Marakwet', region: 'Rift Valley', capital: 'Iten' },
+  { id: 29, name: 'Nandi', region: 'Rift Valley', capital: 'Kapsabet' },
+  { id: 30, name: 'Baringo', region: 'Rift Valley', capital: 'Kabarnet' },
+  { id: 31, name: 'Laikipia', region: 'Rift Valley', capital: 'Nanyuki' },
+  { id: 32, name: 'Nakuru', region: 'Rift Valley', capital: 'Nakuru City' },
+  { id: 33, name: 'Narok', region: 'Rift Valley', capital: 'Narok Town' },
+  { id: 34, name: 'Kajiado', region: 'Rift Valley', capital: 'Kajiado Town' },
+  { id: 35, name: 'Kericho', region: 'Rift Valley', capital: 'Kericho Town' },
+  { id: 36, name: 'Bomet', region: 'Rift Valley', capital: 'Bomet Town' },
+  { id: 37, name: 'Kakamega', region: 'Western', capital: 'Kakamega Town' },
+  { id: 38, name: 'Vihiga', region: 'Western', capital: 'Vihiga' },
+  { id: 39, name: 'Bungoma', region: 'Western', capital: 'Bungoma Town' },
+  { id: 40, name: 'Busia', region: 'Western', capital: 'Busia Town' },
+  { id: 41, name: 'Siaya', region: 'Nyanza', capital: 'Siaya Town' },
+  { id: 42, name: 'Kisumu', region: 'Nyanza', capital: 'Kisumu City' },
+  { id: 43, name: 'Homa Bay', region: 'Nyanza', capital: 'Homa Bay Town' },
+  { id: 44, name: 'Migori', region: 'Nyanza', capital: 'Migori Town' },
+  { id: 45, name: 'Kisii', region: 'Nyanza', capital: 'Kisii Town' },
+  { id: 46, name: 'Nyamira', region: 'Nyanza', capital: 'Nyamira Town' },
+  { id: 47, name: 'Nairobi', region: 'Nairobi', capital: 'Nairobi City' },
+]
+
+export const KENYA_REGIONS = [
+  'Nairobi', 'Central', 'Coast', 'Eastern', 'North Eastern',
+  'Nyanza', 'Rift Valley', 'Western',
+]
+
+export const getCountiesByRegion = (region) =>
+  KENYA_COUNTIES.filter((c) => c.region === region)
+
+export const getCounty = (name) =>
+  KENYA_COUNTIES.find((c) => c.name.toLowerCase() === name.toLowerCase())
