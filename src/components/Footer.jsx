@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Vote, Twitter, Facebook, Instagram, Youtube, Mail, MapPin, ArrowUpRight, ExternalLink } from 'lucide-react'
 
 const LINKS = {
@@ -7,6 +7,8 @@ const LINKS = {
 }
 
 export default function Footer() {
+  const navigate = useNavigate()
+
   return (
     <footer className="bg-urban-surface border-t border-urban-border">
 
@@ -98,10 +100,17 @@ export default function Footer() {
           <p className="text-xs text-urban-muted/60 text-center">
             © 2024 Jua Kiongozi 2027. Built for Kenyans, by Kenyans.
           </p>
-          <div className="flex gap-5 text-xs text-urban-muted/60">
+          <div className="flex items-center gap-5 text-xs text-urban-muted/60">
             {['Privacy Policy','Terms of Use','Disclaimer'].map((l) => (
               <a key={l} href="#" className="hover:text-urban-muted transition-colors">{l}</a>
             ))}
+            <button
+              onClick={() => navigate('/x-admin')}
+              title="dk"
+              className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold text-urban-muted/25 hover:text-urban-muted/60 border border-urban-border/30 hover:border-urban-border/60 transition-all duration-200 select-none"
+            >
+              dk
+            </button>
           </div>
         </div>
       </div>
