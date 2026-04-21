@@ -19,7 +19,7 @@ const fadeUp = (delay = 0) => ({
 })
 
 const SectionLabel = ({ children }) => (
-  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.07] bg-white/[0.03] text-xs font-semibold text-urban-muted uppercase tracking-widest mb-4">
+  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-urban-border bg-urban-surface text-xs font-semibold text-urban-muted uppercase tracking-widest mb-4">
     {children}
   </div>
 )
@@ -134,10 +134,8 @@ export default function Home() {
       </section>
 
       {/* ── Candidates ── */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.015] to-transparent" />
-        <div className="absolute inset-0 border-y border-white/[0.04]" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 border-y border-urban-border/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-14">
             <motion.div {...fadeUp()}>
               <SectionLabel>🏛️ Presidential Race</SectionLabel>
@@ -208,10 +206,8 @@ export default function Home() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 border-y border-white/[0.04]" />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,16,46,0.04) 0%, transparent 70%)' }} />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 border-y border-urban-border/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="text-center mb-12">
             <h2 className="section-title">Kenya Election 2027 — Key Facts</h2>
           </motion.div>
@@ -266,12 +262,8 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-28 relative overflow-hidden">
-        <div className="absolute inset-0 border-y border-white/[0.04]" />
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(200,16,46,0.08) 0%, rgba(124,58,237,0.04) 50%, transparent 80%)',
-        }} />
-        <div className="relative max-w-3xl mx-auto px-4 text-center">
+      <section className="py-28 border-y border-urban-border/40">
+        <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.div {...fadeUp()}>
             <div className="w-14 h-14 rounded-2xl mx-auto mb-6 flex items-center justify-center animate-float"
               style={{ background: 'linear-gradient(135deg,rgba(200,16,46,0.2),rgba(200,16,46,0.05))', border: '1px solid rgba(200,16,46,0.2)' }}>

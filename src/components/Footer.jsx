@@ -8,11 +8,7 @@ const LINKS = {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-black border-t border-white/[0.05]">
-      {/* Ambient */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 80% 60% at 10% 100%, rgba(200,16,46,0.06) 0%, transparent 60%)',
-      }} />
+    <footer className="bg-urban-surface border-t border-urban-border">
 
       {/* Flag bar */}
       <div className="flag-bar" />
@@ -89,7 +85,7 @@ export default function Footer() {
                 ['🔥 Niko Kadi', 'border-kenya-red/20 text-red-300/80'],
                 ['⚡ Gen Z Unity', 'border-urban-accent/20 text-cyan-300/80'],
               ].map(([name, cls]) => (
-                <div key={name} className={`px-3 py-2 rounded-lg border bg-white/[0.02] text-xs font-semibold ${cls}`}>
+                <div key={name} className={`px-3 py-2 rounded-lg border bg-urban-card text-xs font-semibold ${cls}`}>
                   {name}
                 </div>
               ))}
@@ -98,7 +94,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-16 pt-6 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-6 border-t border-urban-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-urban-muted/60 text-center">
             © 2024 Jua Kiongozi 2027. Built for Kenyans, by Kenyans.
           </p>

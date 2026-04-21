@@ -70,9 +70,9 @@ export default function AdCarousel() {
           onClick={(e) => e.stopPropagation()}
           className={`relative w-full max-w-md rounded-2xl overflow-hidden`}
           style={{
-            background: 'rgba(10,10,14,0.95)',
+            background: '#141921',
             border: `1px solid ${ad.border}`,
-            boxShadow: `0 0 60px ${ad.glow}, 0 32px 64px rgba(0,0,0,0.6)`,
+            boxShadow: `0 0 40px ${ad.glow}, 0 16px 40px rgba(0,0,0,0.3)`,
           }}
         >
           {/* Top gradient band */}

@@ -105,9 +105,9 @@ export default function AuthModal() {
           onClick={(e) => e.stopPropagation()}
           className="w-full max-w-md rounded-2xl overflow-hidden"
           style={{
-            background: 'rgba(10,10,16,0.96)',
-            border: '1px solid rgba(255,255,255,0.07)',
-            boxShadow: '0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)',
+            background: '#141921',
+            border: '1px solid #2d3348',
+            boxShadow: '0 16px 48px rgba(0,0,0,0.35)',
           }}
         >
           {/* Top strip */}

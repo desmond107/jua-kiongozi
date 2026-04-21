@@ -36,7 +36,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-urban-bg/80 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_1px_40px_rgba(0,0,0,0.6)]'
+            ? 'bg-urban-surface border-b border-urban-border shadow-[0_2px_16px_rgba(0,0,0,0.25)]'
             : 'bg-transparent'
         }`}
       >
@@ -84,7 +84,7 @@ export default function Navbar() {
                       {isActive && (
                         <motion.span
                           layoutId="nav-pill"
-                          className="absolute inset-0 rounded-lg bg-white/[0.06] border border-white/[0.08]"
+                          className="absolute inset-0 rounded-lg bg-urban-card border border-urban-border"
                           style={{ zIndex: -1 }}
                           transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                         />
@@ -101,7 +101,7 @@ export default function Navbar() {
                 <div className="relative">
                   <button
                     onClick={() => setUserMenu(!userMenu)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl glass-dark border border-white/[0.08] hover:border-white/[0.14] transition-all duration-200"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-urban-card border border-urban-border hover:border-urban-borderLight transition-all duration-200"
                   >
                     <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
                       style={{ background: 'linear-gradient(135deg,#e8102a,#7c0015)' }}>
@@ -120,11 +120,11 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute right-0 mt-2 w-48 glass-dark border border-white/[0.08] rounded-xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+                        className="absolute right-0 mt-2 w-48 bg-urban-card border border-urban-border rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
                         onMouseLeave={() => setUserMenu(false)}
                       >
                         <Link to="/profile" onClick={() => setUserMenu(false)}
-                          className="flex items-center gap-2.5 px-4 py-3 text-sm text-gray-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+                          className="flex items-center gap-2.5 px-4 py-3 text-sm text-gray-300 hover:bg-urban-card hover:text-white transition-colors">
                           <User className="w-4 h-4" /> My Profile
                         </Link>
                         <div className="divider mx-3" />
@@ -146,7 +146,7 @@ export default function Navbar() {
             {/* ── Mobile toggle ── */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden w-9 h-9 rounded-lg glass-dark border border-white/[0.08] flex items-center justify-center text-urban-muted hover:text-white transition-colors"
+              className="md:hidden w-9 h-9 rounded-lg bg-urban-card border border-urban-border flex items-center justify-center text-urban-muted hover:text-white transition-colors"
             >
               {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -162,14 +162,14 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[66px] left-0 right-0 z-40 glass-dark border-b border-white/[0.06] md:hidden"
+            className="fixed top-[66px] left-0 right-0 z-40 bg-urban-surface border-b border-urban-border md:hidden"
           >
             <div className="px-4 py-4 space-y-1 max-w-7xl mx-auto">
               {NAV_LINKS.map(({ to, label }) => (
                 <NavLink key={to} to={to} end={to === '/'} onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     `block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                      isActive ? 'bg-white/[0.07] text-white' : 'text-urban-muted hover:text-white hover:bg-white/[0.04]'
+                      isActive ? 'bg-white/[0.07] text-white' : 'text-urban-muted hover:text-white hover:bg-urban-card'
                     }`
                   }
                 >

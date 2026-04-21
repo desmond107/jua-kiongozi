@@ -49,7 +49,7 @@ export default function CandidateCard({ candidate, index = 0 }) {
         {/* Party chip */}
         <div
           className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-bold text-white tracking-wider uppercase"
-          style={{ background: (candidate.partyColor || '#C8102E') + 'cc', backdropFilter: 'blur(4px)' }}
+          style={{ background: candidate.partyColor || '#C8102E' }}
         >
           {candidate.partyShortname}
         </div>
@@ -105,7 +105,7 @@ export default function CandidateCard({ candidate, index = 0 }) {
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">
           {(candidate.tags || []).slice(0, 3).map((t) => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-urban-muted">
+            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-urban-surface border border-urban-border text-urban-muted">
               #{t}
             </span>
           ))}
@@ -114,7 +114,7 @@ export default function CandidateCard({ candidate, index = 0 }) {
         {/* CTA */}
         <Link
           to={`/candidates/${candidate.slug}`}
-          className="mt-auto flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:bg-white/[0.07] hover:border-kenya-red/20 text-gray-300 hover:text-white text-sm font-medium transition-all duration-200 group/btn"
+          className="mt-auto flex items-center justify-between px-4 py-2.5 rounded-xl bg-urban-surface border border-urban-border hover:bg-urban-cardHover hover:border-kenya-red/30 text-gray-300 hover:text-white text-sm font-medium transition-all duration-200 group/btn"
         >
           <span>View Profile</span>
           <ArrowUpRight className="w-4 h-4 opacity-40 group-hover/btn:opacity-100 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-all duration-200" />
