@@ -21,11 +21,15 @@ vi.mock('framer-motion', () => {
   }
 })
 
-// Mock react-hot-toast
-vi.mock('react-hot-toast', () => ({
-  default: { success: vi.fn(), error: vi.fn(), loading: vi.fn() },
-  toast: { success: vi.fn(), error: vi.fn(), loading: vi.fn() },
-}))
+// Mock react-hot-toast — default export must be callable (toast('msg')) AND have .success/.error methods
+vi.mock('react-hot-toast', () => {
+  const toast = Object.assign(vi.fn(), {
+    success: vi.fn(),
+    error: vi.fn(),
+    loading: vi.fn(),
+  })
+  return { default: toast, toast }
+})
 
 // localStorage mock
 const localStorageMock = (() => {

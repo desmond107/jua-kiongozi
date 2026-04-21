@@ -15,6 +15,7 @@ import Counties from './pages/Counties'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Admin from './pages/Admin'
+import Profile from './pages/Profile'
 
 const ADMIN_ROUTES = ['/x-admin', '/x-admin/*']
 const isAdminPath = (path) => path.startsWith('/x-admin')
@@ -45,6 +46,7 @@ function AppRoutes() {
         <Route path="/counties" element={<Counties />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/x-admin" element={<Admin />} />
         <Route path="/x-admin/*" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
