@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
   Shield, Users, FileText, BarChart3, LogOut, Vote,
@@ -9,6 +9,7 @@ import CandidateManager from '../components/admin/CandidateManager'
 import BlogManager from '../components/admin/BlogManager'
 import { VoteBarChart, LeaderboardChart } from '../components/AnalyticsCharts'
 import { PRESIDENTIAL_CANDIDATES } from '../utils/candidatesData'
+import { useApp } from '../context/AppContext'
 
 const TABS = [
   { id: 'overview', label: 'Overview', icon: BarChart3 },
@@ -17,16 +18,22 @@ const TABS = [
   { id: 'analytics', label: 'Analytics', icon: TrendingUp },
 ]
 
-const OVERVIEW_STATS = [
-  { label: 'Total Votes', value: '847,293', change: '+2.4k today', icon: Vote, color: 'text-kenya-red' },
-  { label: 'Active Users', value: '12,847', change: '+347 today', icon: Users, color: 'text-urban-accent' },
-  { label: 'Candidates', value: PRESIDENTIAL_CANDIDATES.length.toString(), change: 'Active', icon: Shield, color: 'text-urban-gold' },
-  { label: 'Blog Posts', value: '6', change: '4 published', icon: FileText, color: 'text-green-400' },
-]
-
 export default function Admin() {
   const [authenticated, setAuthenticated] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
+  const { voteCounts } = useApp()
+
+  const totalVotes = useMemo(() =>
+    Object.values(voteCounts).reduce((s, c) => s + c.yes + c.no + c.unsure, 0),
+    [voteCounts]
+  )
+
+  const overviewStats = [
+    { label: 'Total Votes', value: totalVotes.toLocaleString(), change: totalVotes > 0 ? 'Live' : 'Waiting', icon: Vote, color: 'text-kenya-red' },
+    { label: 'Active Users', value: '—', change: 'Coming soon', icon: Users, color: 'text-urban-accent' },
+    { label: 'Candidates', value: PRESIDENTIAL_CANDIDATES.length.toString(), change: 'Active', icon: Shield, color: 'text-urban-gold' },
+    { label: 'Blog Posts', value: '6', change: '4 published', icon: FileText, color: 'text-green-400' },
+  ]
 
   useEffect(() => {
     if (sessionStorage.getItem('jk_admin') === 'true') {
@@ -107,7 +114,7 @@ export default function Admin() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
               {/* Stats */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {OVERVIEW_STATS.map(({ label, value, change, icon: Icon, color }) => (
+                {overviewStats.map(({ label, value, change, icon: Icon, color }) => (
                   <div key={label} className="card p-5">
                     <div className="flex items-start justify-between mb-3">
                       <Icon className={`w-5 h-5 ${color}`} />

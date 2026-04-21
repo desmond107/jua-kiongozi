@@ -1,28 +1,11 @@
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis,
+  PieChart, Pie, Cell, Legend,
 } from 'recharts'
 import { PRESIDENTIAL_CANDIDATES } from '../utils/candidatesData'
 import { useApp } from '../context/AppContext'
 
 const VOTE_COLORS = { yes: '#22c55e', no: '#ef4444', unsure: '#f59e0b' }
-
-const generateMockData = (candidates, votes) => {
-  return candidates.map((c) => {
-    const base = Math.floor(Math.random() * 40000) + 5000
-    const spread = Math.random()
-    return {
-      name: c.name.split(' ').slice(-1)[0],
-      fullName: c.name,
-      yes: Math.floor(base * spread * 0.6),
-      no: Math.floor(base * (1 - spread) * 0.4),
-      unsure: Math.floor(base * 0.1),
-      total: base,
-      party: c.partyShortname,
-      partyColor: c.partyColor,
-    }
-  })
-}
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
@@ -40,9 +23,39 @@ const CustomTooltip = ({ active, payload, label }) => {
   )
 }
 
+function EmptyChart({ message = 'No votes yet — cast your vote to see data here' }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full gap-3 py-8 text-center">
+      <div className="text-3xl opacity-40">🗳️</div>
+      <p className="text-xs text-urban-muted max-w-[200px] leading-relaxed">{message}</p>
+    </div>
+  )
+}
+
 export function VoteBarChart() {
-  const { votes } = useApp()
-  const data = generateMockData(PRESIDENTIAL_CANDIDATES, votes)
+  const { voteCounts } = useApp()
+
+  const data = PRESIDENTIAL_CANDIDATES.map((c) => {
+    const counts = voteCounts[c.id] || { yes: 0, no: 0, unsure: 0 }
+    return {
+      name: c.name.split(' ').slice(-1)[0],
+      yes: counts.yes,
+      no: counts.no,
+      unsure: counts.unsure,
+      party: c.partyShortname,
+      partyColor: c.partyColor,
+    }
+  })
+
+  const hasVotes = data.some((d) => d.yes + d.no + d.unsure > 0)
+
+  if (!hasVotes) {
+    return (
+      <div style={{ height: 350 }}>
+        <EmptyChart message="Vote distribution will appear here once voting begins" />
+      </div>
+    )
+  }
 
   return (
     <ResponsiveContainer width="100%" height={350}>
@@ -55,31 +68,39 @@ export function VoteBarChart() {
           textAnchor="end"
           interval={0}
         />
-        <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
+        <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} allowDecimals={false} />
         <Tooltip content={<CustomTooltip />} />
         <Legend wrapperStyle={{ color: '#9ca3af', fontSize: 12, paddingTop: 16 }} />
-        <Bar dataKey="yes" stackId="a" fill={VOTE_COLORS.yes} name="Support" radius={[0, 0, 0, 0]} />
-        <Bar dataKey="no" stackId="a" fill={VOTE_COLORS.no} name="Oppose" />
-        <Bar dataKey="unsure" stackId="a" fill={VOTE_COLORS.unsure} name="Unsure" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="yes"    stackId="a" fill={VOTE_COLORS.yes}    name="Support" />
+        <Bar dataKey="no"     stackId="a" fill={VOTE_COLORS.no}     name="Oppose"  />
+        <Bar dataKey="unsure" stackId="a" fill={VOTE_COLORS.unsure} name="Unsure"  radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )
 }
 
 export function VotePieChart({ candidateId }) {
+  const { voteCounts } = useApp()
+
   const candidate = PRESIDENTIAL_CANDIDATES.find((c) => c.id === parseInt(candidateId))
   if (!candidate) return null
 
-  const base = Math.floor(Math.random() * 50000 + 10000)
-  const yes = Math.floor(base * 0.55)
-  const no = Math.floor(base * 0.30)
-  const unsure = base - yes - no
+  const counts = voteCounts[candidate.id] || { yes: 0, no: 0, unsure: 0 }
+  const total = counts.yes + counts.no + counts.unsure
+
+  if (total === 0) {
+    return (
+      <div style={{ height: 220 }}>
+        <EmptyChart message="No votes yet" />
+      </div>
+    )
+  }
 
   const data = [
-    { name: 'Support', value: yes, color: VOTE_COLORS.yes },
-    { name: 'Oppose', value: no, color: VOTE_COLORS.no },
-    { name: 'Unsure', value: unsure, color: VOTE_COLORS.unsure },
-  ]
+    { name: 'Support', value: counts.yes,    color: VOTE_COLORS.yes    },
+    { name: 'Oppose',  value: counts.no,     color: VOTE_COLORS.no     },
+    { name: 'Unsure',  value: counts.unsure, color: VOTE_COLORS.unsure },
+  ].filter((d) => d.value > 0)
 
   return (
     <ResponsiveContainer width="100%" height={220}>
@@ -101,44 +122,60 @@ export function VotePieChart({ candidateId }) {
           content={({ active, payload }) => {
             if (!active || !payload?.length) return null
             const item = payload[0]
-            const total = data.reduce((a, b) => a + b.value, 0)
             return (
               <div className="bg-urban-card border border-urban-border rounded-lg p-2 text-xs">
                 <p style={{ color: item.payload.color }} className="font-bold">{item.name}</p>
-                <p className="text-white">{item.value?.toLocaleString()} ({((item.value / total) * 100).toFixed(1)}%)</p>
+                <p className="text-white">
+                  {item.value?.toLocaleString()} ({((item.value / total) * 100).toFixed(1)}%)
+                </p>
               </div>
             )
           }}
         />
-        <Legend
-          formatter={(value) => <span style={{ color: '#9ca3af', fontSize: 11 }}>{value}</span>}
-        />
+        <Legend formatter={(value) => <span style={{ color: '#9ca3af', fontSize: 11 }}>{value}</span>} />
       </PieChart>
     </ResponsiveContainer>
   )
 }
 
 export function LeaderboardChart() {
-  const data = PRESIDENTIAL_CANDIDATES.map((c) => ({
-    name: c.name.split(' ').slice(-1)[0],
-    support: Math.floor(Math.random() * 70 + 20),
-    rating: Math.floor(Math.random() * 5 + 4),
-    color: c.partyColor,
-  })).sort((a, b) => b.support - a.support)
+  const { voteCounts } = useApp()
+
+  const data = PRESIDENTIAL_CANDIDATES.map((c) => {
+    const counts = voteCounts[c.id] || { yes: 0, no: 0, unsure: 0 }
+    const total = counts.yes + counts.no + counts.unsure
+    const support = total > 0 ? Math.round((counts.yes / total) * 100) : 0
+    return {
+      name: c.name.split(' ').slice(-1)[0],
+      fullName: c.name,
+      support,
+      total,
+      color: c.partyColor,
+    }
+  }).sort((a, b) => b.support - a.support || b.total - a.total)
+
+  const hasVotes = data.some((d) => d.total > 0)
 
   return (
     <div className="space-y-3">
+      {!hasVotes && (
+        <p className="text-xs text-urban-muted text-center py-4">
+          Leaderboard will update as users vote
+        </p>
+      )}
       {data.map((item, i) => (
         <div key={item.name} className="flex items-center gap-3">
           <span className="text-xs font-bold text-gray-500 w-5 text-right">{i + 1}</span>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
               <span className="text-sm text-white font-medium">{item.name}</span>
-              <span className="text-xs text-gray-400">{item.support}%</span>
+              <span className="text-xs text-gray-400">
+                {item.total > 0 ? `${item.support}%` : '—'}
+              </span>
             </div>
             <div className="h-2 bg-urban-surface rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-1000"
+                className="h-full rounded-full transition-all duration-700"
                 style={{ width: `${item.support}%`, backgroundColor: item.color || '#BE0027' }}
               />
             </div>
